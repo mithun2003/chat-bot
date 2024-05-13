@@ -1,0 +1,66 @@
+<div
+  class="relative flex w-full cursor-text items-center justify-between rounded-md border-[1.7px] border-common-border-color px-3 py-1.5 transition-colors duration-150 focus-within:border-common-blue-color"
+  (click)="inputRef.focus()"
+  (keydown)="inputRef.focus()"
+  (keyup)="inputRef.focus()"
+  tabindex="-1"
+  [ngClass]="{
+    'h-[45px]': inputType() !== 'search',
+    'h-[39px]': inputType() === 'search',
+    '!border-common-secondary-bg-color bg-common-secondary-bg-color':
+      filledBackground() && inputType() === 'search',
+    '!border-common-red-color': control().invalid && control().touched,
+    'cursor-not-allowed': inputDisabled
+  }"
+>
+  @if (inputType() === "search") {
+    <span
+      class="material-symbols-sharp mat-line block overflow-hidden pr-1.5 text-base text-common-secondary-font-color transition-all duration-200"
+      [ngClass]="{
+        'w-0 opacity-0': inputValue,
+        'w-[20px] opacity-100': !inputValue
+      }"
+    >
+      search
+    </span>
+  }
+  <input
+    [type]="
+      inputType() === 'password' && !passwordVisible ? 'password' : 'text'
+    "
+    #inputRef
+    class="flex-1 bg-transparent outline-none"
+    [placeholder]="placeholder()"
+    [(ngModel)]="inputValue"
+    [disabled]="inputDisabled"
+    (keyup)="onChange(inputValue); validateInput()"
+    (change)="onChange(inputValue); validateInput()"
+    (blur)="onTouch(inputValue); validateInput()"
+  />
+  @if (inputType() === "search") {
+    <span
+      class="material-symbols-sharp mat-line block cursor-pointer overflow-hidden text-sm text-common-secondary-font-color transition-all duration-200 hover:text-common-primary-font-color"
+      [ngClass]="{
+        'w-0 opacity-0': !inputValue,
+        'w-[20px] opacity-100': inputValue
+      }"
+      (click)="clearInput()"
+      (keyup)="clearInput()"
+      (keydown)="clearInput()"
+      tabindex="-1"
+    >
+      close
+    </span>
+  }
+  @if (inputType() === "password") {
+    <app-common-button
+      buttonClass="w-8 flex items-center justify-center text-xs"
+      (clickEmit)="passwordVisible = !passwordVisible"
+      [icon]="passwordVisible ? ['fas', 'eye'] : ['fas','eye']"
+      iconClass="mat-solid"
+    ></app-common-button>
+  }
+</div>
+@if (control()) {
+  <app-control-message [control]="control()"></app-control-message>
+}

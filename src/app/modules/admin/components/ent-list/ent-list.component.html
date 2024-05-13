@@ -1,0 +1,23 @@
+<div>
+  <div class="pl-5 pt-5">
+    <input type="number" [(ngModel)]="currentValue" placeholder="Enter User Id" (keyup.enter)="submitUserId()" class="bg-white font-inter font-medium outline-none rounded-sm h-8 text-xs border-border-color px-1 py-0 border border-solid">
+    <button (click)="submitUserId()" class="rounded-md bg-common-blue-color ml-2 text-white p-1 px-2">Calculate</button>
+    @if(errorMessage){
+      <p class="text-common-red-color text-sm">{{ errorMessage }}</p>
+    }
+  </div>
+  <div class="flex h-full w-full">
+    <div class="flow-root w-full px-5 pt-5">
+      <app-data-table
+        [tableUrl]="tableUrl"
+        [columnDefs]="columnDefs"
+        [frameworkComponents]="frameworkComponents"
+        [heading]="'Platform List'"
+        [headerElements]="headerElements"
+        (rowSelectedEmits)="onRowSelected($event)"
+        [rowHeight]="45"
+        [height]="'68svh'"
+      ></app-data-table>
+    </div>
+  </div>
+</div>

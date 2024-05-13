@@ -1,0 +1,90 @@
+@if (showMessages) {
+  <div class="mb-4 flex h-full flex-col overflow-x-auto" #messageContainer>
+    <div class="flex h-full flex-col">
+      <div class="grid grid-cols-12 gap-y-2">
+        @for (message of messages; track message) {
+          @if (message.query) {
+            @if (adminService.isBulletPointFormat(message.query)) {
+              <div class="col-start-1 col-end-9 rounded-lg p-3">
+                <div class="flex flex-row">
+                  <div
+                    class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                  >
+                    U
+                  </div>
+                  <div
+                    class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-white px-4 py-2 text-sm text-main-font-color shadow"
+                  >
+                    @for (point of message.query.split("\n"); track point) {
+                      <p class="text-sm">{{ point.trim() }}</p>
+                    }
+                  </div>
+                </div>
+              </div>
+            } @else {
+              <div class="col-start-1 col-end-9 rounded-lg p-3">
+                <div class="flex flex-row">
+                  <div
+                    class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                  >
+                    U
+                  </div>
+                  <div
+                    class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-white px-4 py-2 text-sm text-main-font-color shadow"
+                  >
+                    <div>{{ message.query }}</div>
+                  </div>
+                </div>
+              </div>
+            }
+          }
+          @if (message.answer) {
+            @if (adminService.isBulletPointFormat(message.answer)) {
+              <div class="col-start-5 col-end-13 rounded-lg p-3">
+                <div class="flex flex-row-reverse justify-start">
+                  <div
+                    class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                  >
+                    A
+                  </div>
+                  <div
+                    class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-secondary-blue-color px-4 py-2 text-sm shadow"
+                  >
+                    @for (point of message.answer.split("\n"); track point) {
+                      <p class="text-sm">{{ point.trim() }}</p>
+                    }
+                  </div>
+                </div>
+              </div>
+            } @else {
+              <div class="col-start-5 col-end-13 rounded-lg p-3">
+                <div class="flex flex-row-reverse justify-start">
+                  <div
+                    class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                  >
+                    A
+                  </div>
+                  <div
+                    class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-secondary-blue-color px-4 py-2 text-sm shadow"
+                  >
+                    <div>{{ message.answer }}</div>
+                  </div>
+                </div>
+              </div>
+            }
+          }
+        }
+      </div>
+      @if (messages.length === 0) {
+        <div class="flex h-full w-full flex-col items-center justify-center">
+          <img src="/assets/images/notFound.gif" alt="No data found" />
+          <p
+            class="text-md text-md ms-3 font-semibold text-secondary-font-color"
+          >
+            No Messages
+          </p>
+        </div>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,37 @@
+<div class="alert-section relative rounded-xl px-8">
+  <div class="alert-head flex justify-center pt-6">
+    <fa-icon
+      [ngClass]="alertData.alertType"
+      [icon]="['fas', alertContent.icon]"
+      [size]="'2xl'"
+      class="{{ alertContent.iconClass }}"
+    ></fa-icon>
+  </div>
+  <div class="alert-body text-center text-main-text-color mt-3">
+    <h2 class="text-xl font-bold tracking-[0.3px] leading-6 mb-2">
+      {{ alertContent.title }}
+    </h2>
+    <h3 class="text-sm max-w-[40ch] m-auto">{{ alertContent.content }}</h3>
+  </div>
+  <div class="alertbutton-btn flex justify-center gap-2 pt-8 pb-8">
+    @if (alertContent.isCancel) {
+      <app-common-button
+        [label]="alertContent.cancelMsg"
+        (clickEmit)="cancel()"
+        [buttonClass]="
+          'justify-center rounded-md border border-border-color text-main-font-color h-10 w-36'
+        "
+      ></app-common-button>
+    }
+    @if (alertContent.isOk) {
+      <app-common-button
+        [label]="alertContent.doneMsg"
+        (clickEmit)="done()"
+        [buttonClass]="
+          alertContent.btnClass +
+          ' justify-center rounded-md text-white h-10 w-36 '
+        "
+      ></app-common-button>
+    }
+  </div>
+</div>

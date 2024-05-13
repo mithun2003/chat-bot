@@ -1,0 +1,25 @@
+@mixin loading-spinner($border: var(--main-background-color)) {
+  display: inline-block;
+  padding-right: 5px;
+
+  &:after {
+    content: " ";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid $border;
+    border-color: $border transparent $border transparent;
+    animation: lds-dual-ring 1s linear infinite;
+  }
+
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

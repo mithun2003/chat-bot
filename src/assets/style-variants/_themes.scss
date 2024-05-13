@@ -1,0 +1,47 @@
+@use "./dark-theme" as dark;
+@use "./light-theme" as light;
+
+.dark-mode {
+  @include dark.color-mixin();
+}
+
+.light-mode {
+  @include light.color-mixin();
+}
+
+:root {
+  .dark-mode {
+    --main-background-color: #{dark.$main-background-color};
+    --secondary-background-color: #{dark.$secondary-background-color};
+    --tertiary-background-color: #{dark.$tertiary-background-color};
+    --common-green-color: #{dark.$common-green-color};
+    --common-red-color: #{dark.$common-red-color};
+    --common-blue-color: #{dark.$common-blue-color};
+    --common-yellow-color: #{dark.$common-yellow-color};
+    --main-font-color: #{dark.$main-font-color};
+    --secondary-font-color: #{dark.$secondary-font-color};
+    --border-color: #{dark.$border-color};
+    --ag-grid-header-color: #{dark.$ag-grid-header-color};
+    --ag-grid-header-filter-color: #{dark.$ag-grid-header-filter-color};
+  }
+
+  .light-mode {
+    --main-background-color: #{light.$main-background-color};
+    --secondary-background-color: #{light.$secondary-background-color};
+    --tertiary-background-color: #{light.$tertiary-background-color};
+    --quaternary-background-color: #{light.$quaternary-background-color};
+    --common-green-color: #{light.$common-green-color};
+    --common-red-color: #{light.$common-red-color};
+    --tertiary-red-color: #{light.$tertiary-red-color};
+    --secondary-red-color: #{light.$secondary-red-color};
+    --tertiary-green-color: #{light.$tertiary-green-color};
+    --common-blue-color: #{light.$common-blue-color};
+    --secondary-blue-color: #{light.$secondary-blue-color};
+    --common-yellow-color: #{light.$common-yellow-color};
+    --main-font-color: #{light.$main-font-color};
+    --secondary-font-color: #{light.$secondary-font-color};
+    --border-color: #{light.$border-color};
+    --ag-grid-header-color: #{dark.$ag-grid-header-color};
+    --ag-grid-header-filter-color: #{dark.$ag-grid-header-filter-color};
+  }
+}

@@ -1,0 +1,146 @@
+<div
+  class="flex min-h-screen flex-col items-center justify-center bg-secondary-background-color text-main-font-color sm:p-10"
+>
+  <!-- Component Start -->
+  <div
+    class="flex w-full flex-grow flex-col overflow-hidden rounded-lg bg-white shadow-2xl sm:max-w-xl"
+  >
+    <div
+      class="flex h-14 w-full items-center justify-between bg-secondary-blue-color px-4 py-2"
+    >
+      <h3 class="font-bold">ChatBot 💬</h3>
+      <button
+        [disabled]="buttonDisable"
+        class="!bg-tertiary-red-color !text-white"
+        [ngClass]="{ 'opacity-60': buttonDisable }"
+        mat-raised-button
+        matTooltip="Connect with Customer Support"
+        aria-label="Button that displays a tooltip when focused or hovered over"
+        (click)="submitHelp()"
+      >
+        ?
+      </button>
+    </div>
+    <div
+      class="flex h-0 flex-grow flex-col overflow-auto p-4"
+      #messageContainer
+    >
+      <div class="grid grid-cols-12 gap-y-2">
+        @for (message of messages; track message) {
+          @if (message.data) {
+            @if (message.event_person !== 3) {
+              @if (message.event_person == 2 && message.event_type == 5) {
+                <div
+                  class="col-start-3 col-end-11 text-sm text-main-font-color opacity-80"
+                >
+                  <fa-icon [icon]="['fas', 'user-headset']"></fa-icon> Customer
+                  Support Added to the Chat
+                </div>
+              } @else {
+                @if (isBulletPointFormat(message.data)) {
+                  <div class="col-start-1 col-end-9 rounded-lg p-3">
+                    <div class="flex flex-row">
+                      <div
+                        class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-background-color text-lg font-semibold"
+                      >
+                        {{ message.event_person === 1 ? "C" : "A" }}
+                      </div>
+                      <div
+                        class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-secondary-background-color px-4 py-2 text-sm text-main-font-color shadow"
+                      >
+                        @for (point of message.data.split("\n"); track point) {
+                          <p class="text-sm">{{ point.trim() }}</p>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                } @else {
+                  <div class="col-start-1 col-end-9 rounded-lg p-3">
+                    <div class="flex flex-row">
+                      <div
+                        class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-background-color text-lg font-semibold"
+                      >
+                        {{ message.event_person === 1 ? "C" : "A" }}
+                      </div>
+                      <div
+                        class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-secondary-background-color px-4 py-2 text-sm text-main-font-color shadow"
+                      >
+                        <div>{{ message.data }}</div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              }
+            } @else {
+              @if (isBulletPointFormat(message.data)) {
+                <div class="col-start-5 col-end-13 rounded-lg p-3">
+                  <div class="flex flex-row-reverse justify-start">
+                    <div
+                      class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-background-color text-lg font-semibold"
+                    >
+                      U
+                    </div>
+                    <div
+                      class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-common-blue-color px-4 py-2 text-sm text-white shadow"
+                    >
+                      @for (point of message.data.split("\n"); track point) {
+                        <p class="text-sm">{{ point.trim() }}</p>
+                      }
+                    </div>
+                  </div>
+                </div>
+              } @else {
+                <div class="col-start-5 col-end-13 rounded-lg p-3">
+                  <div class="flex flex-row-reverse justify-start">
+                    <div
+                      class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-background-color text-lg font-semibold"
+                    >
+                      U
+                    </div>
+                    <div
+                      class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-common-blue-color px-4 py-2 text-sm text-white shadow"
+                    >
+                      <div>{{ message.data }}</div>
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          }
+        }
+        @if (messageLoading) {
+          <img src="/assets/images/loading.gif" alt="" />
+        }
+      </div>
+      <!-- @if (showCustomerSupportAdd) {
+        <div
+          class="flex justify-center gap-2 text-sm text-main-font-color opacity-80"
+        >
+          <fa-icon [icon]="['fas', 'user-headset']"></fa-icon> Customer Support
+          Added to the Chat
+        </div>
+      } -->
+    </div>
+
+    <div class="flex bg-secondary-background-color p-4">
+      <textarea
+        class="scrollbar-none flex h-10 w-full resize-none items-center overflow-y-auto rounded border-border-color px-3 text-sm leading-8 focus:border-secondary-blue-color focus:outline-none"
+        [(ngModel)]="messageInput"
+        (keyup.enter)="sendMessage(messageInput)"
+        placeholder="Type your message…"
+      ></textarea>
+
+      <button
+        class="ms-4 flex flex-shrink-0 items-center justify-center rounded-xl bg-common-blue-color px-4 py-1 text-white hover:opacity-85"
+        (click)="sendMessage(messageInput)"
+        [disabled]="messageLoading"
+      >
+        <span>Send</span>
+        <span class="ml-2">
+          <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+        </span>
+      </button>
+    </div>
+  </div>
+  <!-- Component End  -->
+</div>

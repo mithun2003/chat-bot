@@ -1,0 +1,24 @@
+@mixin color-mixin() {
+  //=========== App Colors ===========//
+  $main-background-color: #ffffff !global;
+  $secondary-background-color: #f5f7fa !global;
+  $tertiary-background-color: #f8f9fa !global;
+  $quaternary-background-color: #f4f9ff !global;
+  $common-green-color: #08b160 !global;
+  $secondary-green-color: #e9f5eb !global;
+  $tertiary-green-color: #0fbe8a !global;
+  $quaternary-green-color: #b9ebdc !global;
+  $common-red-color: #d02222 !global;
+  $secondary-red-color: #fff0f0 !global;
+  $tertiary-red-color: #e57371 !global;
+  $quaternary-red-color: #e9aead !global;
+  $common-blue-color: #217eea !global;
+  $secondary-blue-color: #e2f1ff !global;
+  $common-yellow-color: #ff9c27 !global;
+  $secondary-yellow-color: #fef5e7 !global;
+  $main-font-color: #3a4452 !global;
+  $secondary-font-color: #808b9a !global;
+  $border-color: #dae9f1 !global;
+  $ag-grid-header-color: #e3effb !global;
+  $ag-grid-header-filter-color: #f0f8ff !global;
+}

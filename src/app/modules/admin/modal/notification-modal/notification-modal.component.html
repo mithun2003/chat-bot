@@ -1,0 +1,68 @@
+<!-- Main modal -->
+<div
+  id="select-modal"
+  tabindex="-1"
+  aria-hidden="true"
+  class="fixed left-0 right-0 top-0 z-50 flex h-[calc(100%-1rem)] max-h-full w-full items-center justify-center overflow-y-auto overflow-x-hidden backdrop-brightness-50 md:inset-0"
+>
+  <div class="relative max-h-full w-full max-w-md p-4">
+    <!-- Modal content -->
+    <div class="relative rounded-lg bg-main-background-color shadow">
+      <!-- Modal header -->
+      <div
+        class="flex items-center justify-between rounded-t border-b border-border-color p-4 md:p-5"
+      >
+        <h3 class="text-lg font-semibold text-main-font-color">
+          Notifications
+        </h3>
+        <button
+          type="button"
+          (click)="adminService.showNotificationModal()"
+          class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-main-font-color hover:bg-secondary-background-color"
+          data-modal-toggle="select-modal"
+        >
+          <fa-icon [icon]="['fas', 'xmark']" [size]="'lg'"></fa-icon>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <div class="max-h-[50rem] overflow-auto p-4 md:p-5">
+        <p class="mb-4 text-main-font-color">Users:</p>
+        <ul class="mb-4 space-y-4">
+          @if (notifications().length > 0) {
+            @for (notification of notifications(); track notification) {
+              <li>
+                <div
+                  class="inline-flex w-full cursor-pointer items-center justify-between rounded-lg border border-border-color bg-white p-5"
+                >
+                  <div class="block">
+                    <div class="w-full text-lg font-semibold">
+                      {{ notification.session_id }}
+                    </div>
+                    <div class="w-full text-secondary-font-color">
+                      {{ notification.data }}
+                    </div>
+                  </div>
+                  <button
+                    class="flex h-8 w-8 items-center justify-center rounded-md bg-tertiary-green-color text-white hover:opacity-85"
+                    (click)="helpAccept(notification.session_id)"
+                  >
+                    <fa-icon [icon]="['fas', 'check']"></fa-icon>
+                  </button>
+                </div>
+              </li>
+            }
+          } @else {
+            <div class="flex flex-col items-center justify-center">
+              <img src="/assets/images/notFound.gif" alt="No data found" />
+              <p
+                class="text-md text-md ms-3 font-semibold text-secondary-font-color"
+              >
+                No notification
+              </p>
+            </div>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

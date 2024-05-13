@@ -1,0 +1,25 @@
+<button
+  [disabled]="isLoading"
+  class="flex items-center"
+  [ngClass]="buttonClass"
+  (click)="buttonClick()"
+  [matTooltip]="tooltipMessage"
+>
+  @if (iconEnabled) {
+    <span>
+      <fa-icon [icon]="icon" class="mx-1"></fa-icon>
+    </span>
+  }
+  @if (labelEnabled) {
+    <span [ngClass]="labelClass">{{ label }}</span>
+  }
+  @if (isLoading) {
+    <span>
+      <mat-progress-spinner
+        [diameter]="spinnerDiameter"
+        [ngStyle]="getSpinnerStyle()"
+        mode="indeterminate"
+      ></mat-progress-spinner>
+    </span>
+  }
+</button>

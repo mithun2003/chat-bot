@@ -1,0 +1,93 @@
+<div class="p-5">
+  <!-- modal header -->
+  <div class="border-b border-border-color">
+    <div class="pb-2 text-main-font-color">
+      Change Root URL
+      <span
+        class="group cursor-help select-none text-xs text-secondary-font-color"
+        >(dev<span class="hidden group-hover:inline"
+          >elopment mode only feature</span
+        >)</span
+      >
+    </div>
+  </div>
+  <!-- modal body start -->
+  <div class="py-5">
+    <div class="pt-5">
+      <app-common-input
+        [formControl]="url"
+        inputType="text"
+        [control]="url"
+        placeholder="Root Url"
+        (change)="onChangeValue()"
+      ></app-common-input>
+    </div>
+
+    <div class="text-sm text-secondary-font-color">
+      <p>eg: https://staging.api.bankerdata.sebipay.com</p>
+    </div>
+    <div class="pt-3 text-[13px] text-secondary-font-color">
+      @if (isChangedUrlExist) {
+        <p>
+          Current URL:
+          <span class="text-common-green-color">{{ isChangedUrlExist }}</span>
+          <span class="text-xs text-secondary-font-color"> (custom)</span>
+        </p>
+        <p>
+          Current WebSocket Url:
+          <span class="text-common-green-color">{{
+            isChangedWebSocketUrlExist
+          }}</span>
+          <span class="text-xs text-secondary-font-color"> (custom)</span>
+        </p>
+      } @else {
+        <p>
+          Current URL:
+          <span class="font-medium text-common-blue-color">{{ baseUrl }}</span>
+          <span class="text-xs text-secondary-font-color"> (default)</span>
+        </p>
+        <p>
+          Current WebSocket URL:
+          <span class="font-medium text-common-blue-color">{{
+            webSocketUrl
+          }}</span>
+          <span class="text-xs text-secondary-font-color"> (default)</span>
+        </p>
+      }
+    </div>
+  </div>
+  <!-- modal body end -->
+  <div class="flex w-full justify-between">
+    <mat-dialog-actions align="start">
+      @if (isChangedUrlExist) {
+        <app-common-button
+          label="Reset"
+          mat-dialog-close
+          buttonClass="btn font-medium text-sm rounded-md flex justify-center items-center gap-[5px] outline-none hover:!shadow-common-box-shadow bg-tertiary-red-color text-white p-3 h-9 transition-all duration-300 border border-dotted border-transparent hover:border-border-color"
+          (clickEmit)="resetBaseUrl()"
+        >
+        </app-common-button>
+      }
+    </mat-dialog-actions>
+
+    <mat-dialog-actions align="end">
+      <div class="flex gap-1.5">
+        <app-common-button
+          label="Cancel"
+          mat-dialog-close
+          buttonClass="btn font-medium text-sm rounded-md flex justify-center items-center gap-[5px] outline-none hover:!shadow-common-box-shadow bg-common-button-color p-3 h-9 transition-all duration-300 border border-dotted border-transparent hover:border-common-border-color"
+          (clickEmit)="closeModal()"
+        >
+        </app-common-button>
+        @if (url.valid) {
+          <app-common-button
+            label="Change"
+            buttonClass="btn font-medium text-sm rounded-md flex justify-center items-center gap-[5px] outline-none hover:!shadow-common-box-shadow bg-tertiary-green-color p-3 text-white h-9 transition-all duration-300 border border-dotted border-transparent hover:border-border-color"
+            (clickEmit)="onSubmit()"
+          >
+          </app-common-button>
+        }
+      </div>
+    </mat-dialog-actions>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+/* Removes Empty Gaps in HTML */
+html,
+body {
+  height: 100%;
+  background-color: var(--main-background-color);
+}
+
+/* Globally Sets the default margin as 0 and sets the
+Roboto font as the default */
+body {
+  margin: 0;
+  font-family: var(--nunito-sans);
+  color: var(--main-text-color);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  color: var(--main-font-color) !important;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-background-color) !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-font-color) !important;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-font-color) !important;
+}

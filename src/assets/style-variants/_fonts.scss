@@ -1,0 +1,41 @@
+$inter: "Inter", sans-serif;
+$raleway: "Raleway", sans-serif;
+$space-mono: "Space Mono", monospace;
+$nicomoji: "nicomoji", sans-serif;
+$nunito-sans: "Nunito Sans", sans-serif;
+
+:root {
+  --inter: #{$inter};
+  --raleway: #{$raleway};
+  --space-mono: #{$space-mono};
+  --nicomoji: #{$nicomoji};
+  --nunito-sans: #{$nunito-sans};
+}
+
+//=============== Inter =================//
+@font-face {
+  font-family: "Inter";
+  src: url("./../fonts/inter-variable-font-weights.ttf") format("truetype");
+}
+
+//=============== Raleway =================//
+@font-face {
+  font-family: "Raleway";
+  src: url("./../fonts/raleway-variable-font-weights.ttf") format("truetype");
+}
+
+//=============== Space Mono =================//
+@font-face {
+  font-family: "Space Mono";
+  src: url("./../fonts/space-mono-variable-font-weights.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "nicomoji";
+  src: url("./../fonts/nicomoji-regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("./../fonts/NunitoSans-font.ttf") format("truetype");
+}

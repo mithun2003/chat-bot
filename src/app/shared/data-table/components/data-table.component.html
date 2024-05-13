@@ -1,0 +1,56 @@
+<!-- <div class="data-table-grid-container">
+  <ag-grid-angular
+    [style]="{ width: width, height: height, margin: 'auto auto' }"
+    class="ag-theme-alpine"
+    [columnDefs]="columnDefs"
+    (gridReady)="onGridReady($event)"
+    [components]="frameworkComponents"
+    [domLayout]="domLayout"
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    [rowHeight]="rowHeight"
+    [rowBuffer]="40"
+    [isRowSelectable]="isRowSelectable"
+    [rowSelection]="rowSelection"
+    [rowMultiSelectWithClick]="true"
+    [rowModelType]="rowModelType"
+    (selectionChanged)="onRowSelectionChanged($event)"
+    [suppressRowClickSelection]="true"
+    [maxConcurrentDatasourceRequests]="1"
+    [overlayNoRowsTemplate]="noRowsTemplate"
+    [suppressDragLeaveHidesColumns]="true"
+    [gridOptions]="gridOptions"
+    [animateRows]="true"
+    [rowData]="dataTableService.rowData"
+  >
+  </ag-grid-angular>
+</div> -->
+<div class="data-table-grid-container">
+  <ag-grid-angular
+    [style]="{ width: width, height: height, margin: 'auto auto' }"
+    class="ag-theme-alpine"
+    [columnDefs]="columnDefs"
+    (gridReady)="onGridReady($event)"
+    [components]="frameworkComponents"
+    [domLayout]="domLayout"
+    [defaultColDef]="defaultColDef"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    [rowHeight]="rowHeight"
+    [rowBuffer]="40"
+    [isRowSelectable]="isRowSelectable"
+    [rowSelection]="rowSelection"
+    [rowMultiSelectWithClick]="true"
+    [cacheBlockSize]="paginationPageSize"
+    [rowModelType]="rowModelType"
+    (selectionChanged)="onRowSelectionChanged($event)"
+    [suppressRowClickSelection]="true"
+    [maxConcurrentDatasourceRequests]="1"
+    [overlayNoRowsTemplate]="noRowsTemplate"
+    [suppressDragLeaveHidesColumns]="true"
+    [gridOptions]="gridOptions"
+    [animateRows]="true"
+  >
+  </ag-grid-angular>
+</div>

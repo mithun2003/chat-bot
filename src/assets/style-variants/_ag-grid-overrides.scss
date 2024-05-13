@@ -1,0 +1,42 @@
+/* Global Classes and Overrides for AG Grid */
+
+.data-table-grid-container {
+  .ag-theme-alpine {
+    --ag-range-selection-border-style: none;
+    .ag-root-wrapper {
+      border-radius: 5px !important;
+      border-color: var(--border-color);
+    }
+
+    .ag-header {
+      height: 83px !important;
+    }
+
+    .ag-floating-filter-full-body input {
+      padding-left: 12px;
+    }
+
+    .ag-row {
+      border-bottom: 1px solid var(--border-color);
+      color: var(--main-font-color);
+    }
+
+    .ag-header-row-column {
+      background-color: var(--ag-grid-header-color);
+    }
+    .ag-header-row-column-filter {
+      background-color: var(--ag-grid-header-filter-color);
+    }
+
+    .ag-cell {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+  }
+}
+
+.center-header .ag-header-cell-label {
+  display: flex;
+  justify-content: center;
+}

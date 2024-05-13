@@ -1,0 +1,138 @@
+<div class="flex h-full flex-auto flex-col p-6 pt-7">
+  <div
+    class="flex h-full flex-auto flex-shrink-0 flex-col rounded-2xl bg-secondary-background-color p-4"
+  >
+    {{ selectedSessionId() }}
+    @if (selectedSessionId()) {
+      <div class="mb-4 flex h-full flex-col overflow-x-auto" #messageContainer>
+        <div class="flex h-full flex-col">
+          <div class="grid grid-cols-12 gap-y-2">
+            @for (
+              message of getMessagesBySessionId(selectedSessionId());
+              track message
+            ) {
+              @if (message.data) {
+                @if (message.event_person !== 2) {
+                  @if (adminService.isBulletPointFormat(message.data)) {
+                    <div class="col-start-1 col-end-9 rounded-lg p-3">
+                      <div class="flex flex-row">
+                        <div
+                          class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                        >
+                          {{ message.event_person === 1 ? 'C' : 'U' }}
+                        </div>
+                        <div
+                          class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-white px-4 py-2 text-sm text-main-font-color shadow"
+                        >
+                          @for (
+                            point of message.data.split("\n");
+                            track point
+                          ) {
+                            <p class="text-sm">{{ point.trim() }}</p>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  } @else {
+                    <div class="col-start-1 col-end-9 rounded-lg p-3">
+                      <div class="flex flex-row">
+                        <div
+                          class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                        >
+                          {{ message.event_person === 1 ? 'C' : 'U' }}
+                        </div>
+                        <div
+                          class="relative ml-3 overflow-auto rounded-r-lg rounded-bl-lg bg-white px-4 py-2 text-sm text-main-font-color shadow"
+                        >
+                          <div>{{ message.data }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                } @else {
+                  @if (adminService.isBulletPointFormat(message.data)) {
+                    <div class="col-start-5 col-end-13 rounded-lg p-3">
+                      <div class="flex flex-row-reverse justify-start">
+                        <div
+                          class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                        >
+                          A
+                        </div>
+                        <div
+                          class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-secondary-blue-color px-4 py-2 text-sm shadow"
+                        >
+                          @for (
+                            point of message.data.split("\n");
+                            track point
+                          ) {
+                            <p class="text-sm">{{ point.trim() }}</p>
+                          }
+                        </div>
+                      </div>
+                    </div>
+                  } @else {
+                    <div class="col-start-5 col-end-13 rounded-lg p-3">
+                      <div class="flex flex-row-reverse justify-start">
+                        <div
+                          class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-secondary-blue-color text-lg font-semibold"
+                        >
+                          A
+                        </div>
+                        <div
+                          class="relative mr-3 overflow-auto rounded-l-lg rounded-br-lg bg-secondary-blue-color px-4 py-2 text-sm shadow"
+                        >
+                          <div>{{ message.data }}</div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                }
+              }
+            }
+          </div>
+        </div>
+      </div>
+      @if (adminService.showInput()) {
+        <div
+          class="flex h-16 w-full flex-row items-center rounded-xl bg-white px-4"
+        >
+          <div class="ml-1 flex-grow">
+            <div class="relative w-full">
+              <textarea
+                type="text"
+                [(ngModel)]="messageInput"
+                (keyup.enter)="sendMessage(messageInput)"
+                placeholder="type your message here..."
+                class="scrollbar-none flex h-10 w-full resize-none overflow-y-auto rounded-xl border border-border-color pl-4 leading-8 text-main-font-color focus:border-secondary-blue-color focus:outline-none"
+              ></textarea>
+              <button
+                class="absolute right-0 top-0 flex h-full w-12 items-center justify-center text-lg text-secondary-font-color hover:text-main-font-color"
+              >
+                <fa-icon [icon]="['far', 'face-smile']"></fa-icon>
+              </button>
+            </div>
+          </div>
+          <div class="ml-4">
+            <button
+              class="flex flex-shrink-0 items-center justify-center rounded-xl bg-common-blue-color px-4 py-1 text-white hover:opacity-85"
+              (click)="sendMessage(messageInput)"
+            >
+              <span>Send</span>
+              <span class="ml-2">
+                <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon>
+              </span>
+            </button>
+          </div>
+        </div>
+      }
+    }
+
+    @if (selectedOlderSessionId()) {
+      <div class="h-full max-h-full">
+        <app-dashboard-old-chat-page
+          [selectedOlderSessionId]="selectedOlderSessionId() ?? ''"
+        ></app-dashboard-old-chat-page>
+      </div>
+    }
+  </div>
+</div>

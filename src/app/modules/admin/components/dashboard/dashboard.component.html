@@ -1,0 +1,96 @@
+<div class="flex h-screen text-main-font-color antialiased">
+  <div class="flex h-full w-full flex-row overflow-x-hidden">
+    <div class="flex w-72 flex-shrink-0 flex-col bg-white py-8 pl-6 pr-2">
+      <div class="flex h-12 w-full flex-row items-center justify-center">
+        <div class="text-2xl font-bold">Dashboard</div>
+      </div>
+      <div class="mt-8 flex h-1/2 flex-col overflow-auto overflow-x-hidden">
+        <div class="flex flex-row items-center justify-between text-xs">
+          <span class="font-bold text-secondary-font-color"
+            >Active Conversations</span
+          >
+          <button
+            class="relative flex cursor-pointer items-center"
+            (click)="adminService.showNotificationModal()"
+          >
+            <span
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-secondary-blue-color"
+            >
+              <span
+                [matBadge]="getEventTypeIs2() && eventTypeLength"
+                matBadgeColor="warn"
+                matBadgeSize="small"
+              >
+                <fa-icon [icon]="['fas', 'bell']" [size]="'xl'"></fa-icon>
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <div class="mt-4 flex flex-col space-y-1 overflow-auto">
+          @for (id of adminService.sessionIds; track id) {
+            <button
+              class="flex flex-row items-center rounded-xl p-2 hover:bg-secondary-background-color"
+              (click)="showMessages(id)"
+              [ngClass]="{
+                'border border-border-color bg-secondary-background-color':
+                  id === selectedSessionId
+              }"
+            >
+              <div
+                class="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-blue-color"
+              >
+                {{ id[0] || 0 }}
+              </div>
+              <div class="ml-2 text-wrap text-sm font-semibold">{{ id }}</div>
+            </button>
+          }
+        </div>
+      </div>
+      @if (olderSessionIds) {
+        <div class="mt-8 flex h-1/2 flex-col overflow-auto overflow-x-hidden">
+          <span class="text-xs font-bold text-secondary-font-color"
+            >Older Conversations</span
+          >
+          <div class="mt-4 flex flex-col space-y-1 overflow-auto">
+            @for (id of olderSessionIds; track id) {
+              <button
+                class="flex flex-row items-center rounded-xl p-2 hover:bg-secondary-background-color"
+                (click)="selectedOlderSessionId = id; selectedSessionId = ''"
+                [ngClass]="{
+                  'border border-border-color bg-secondary-background-color':
+                    id === selectedOlderSessionId
+                }"
+              >
+                <div
+                  class="flex h-8 w-8 items-center justify-center rounded-full bg-secondary-blue-color"
+                >
+                  {{ id[0] || 0 }}
+                </div>
+                <div class="ml-2 text-sm font-semibold">{{ id }}</div>
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <div class="h-full w-full">
+      <app-common-button
+      label="Change Root URL"
+      (clickEmit)="onChangeBaseUrl()"
+      buttonClass=" pt-2 pe-6 text-common-secondary-font-color text-sm !hover:bg-common-secondary-bg-color transition-all duration-300 border border-dotted border-transparent hover:border-common-border-color rounded-md flex justify-end w-full hover:text-common-blue-color font-medium absolute right-0 "
+      >
+    </app-common-button>
+            <app-dashboard-chat-page
+          [selectedSessionId]="selectedSessionId"
+          [selectedOlderSessionId]="selectedOlderSessionId"
+        ></app-dashboard-chat-page>
+      </div>
+  </div>
+  @if (adminService.showModal() === true) {
+    <app-notification-modal
+      [notificationMessages]="getEventTypeIs2()"
+      (sessionIdToRemove)="removeEventFromMessage($event)"
+    ></app-notification-modal>
+  }
+</div>
